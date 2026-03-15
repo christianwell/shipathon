@@ -54,7 +54,7 @@
 		background: #c0392b;
 		border-radius: 999px;
 		padding: 3px 10px 3px 7px;
-		font-family: 'Courier New', monospace;
+		font-family: 'Phantom Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 		font-size: 10px;
 		font-weight: 700;
 		letter-spacing: 0.1em;
@@ -91,7 +91,7 @@
 	.tk-track {
 		display: inline-block;
 		animation: scroll 20s linear infinite;
-		font-family: 'Courier New', monospace;
+		font-family: 'Phantom Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 		font-size: 11px;
 		font-weight: 700;
 		letter-spacing: 0.18em;
