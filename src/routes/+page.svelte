@@ -3,7 +3,8 @@
 	import { onMount } from 'svelte';
 
 	let visible = $state(false);
-	let stepsVisible = $state(false);
+
+	let featureVisible = $state(false);
 	let faqVisible = $state(false);
 	let openIndex = $state(-1);
 
@@ -18,15 +19,15 @@
 		},
 		{
 			q: "So how does it work?",
-			a: "You ship hours to keep up a live stream of HQ basement "
 		},
 		{
 			q: "But what do I get?",
+			a: "You ship hours to keep up a live stream of HQ basement "
 			a: "We will have a shop where users can buy items with the hours they ship, and were gonna run events like live auctions."
 		},
 		{
 			q: "When does this end?",
-			a: "thats the fun part! this ysws ends once it dosnt have anymore time"
+			a: "YOU PICK THE END. When the stream runs out of time, the shipathon is over. Keep shipping to keep it <span class=\"alive\">alive</span>."
 		}
 	];
 
@@ -41,15 +42,15 @@
 			(entries) => {
 				entries.forEach((entry) => {
 					if (!entry.isIntersecting) return;
-					if (entry.target.classList.contains('steps')) stepsVisible = true;
-					if (entry.target.classList.contains('faq')) faqVisible = true;
+						if (entry.target.classList.contains('feature')) featureVisible = true;
+						if (entry.target.classList.contains('faq')) faqVisible = true;
 				});
 			},
 			{ threshold: 0.15 }
 		);
 
-		const stepsEl = document.querySelector('.steps');
-		if (stepsEl) observer.observe(stepsEl);
+		const featureEl = document.querySelector('.feature');
+		if (featureEl) observer.observe(featureEl);
 
 		const el = document.querySelector('.faq');
 		if (el) observer.observe(el);
@@ -61,24 +62,17 @@
 <Ticker />
 
 <div class="page">
-	<div class="bg"></div>
-	<div class="vignette"></div>
+
 
 	<main class:visible>
+		<p class="hero-eyebrow">Hack Club presents</p>
 		<h1 class="logo">shipathon</h1>
-		<p class="tagline">ship projects, keep the stream <span class="alive">alive</span></p>
+		<p class="tagline">You ship. <span class="alive">We stream.</span></p>
+		<p class="hero-desc">You heard of a subathon,well this is Hack Club's spin on it.<br />Ship code, earn hours, and keep a 24/7 live stream of HQ basement alive on <a href="https://hackclub.tv" target="_blank" rel="noopener noreferrer">hackclub.tv</a></p>
+
 		<a href="https://forms.fillout.com/t/fXkrkbBBShus" target="_blank" rel="noopener noreferrer" class="coming-soon">COMING SOON</a>
 	</main>
-
-	<a href="#faq" class="scroll-hint" aria-label="Scroll to FAQ">
-		<div class="scroll-mouse">
-			<div class="scroll-wheel"></div>
-		</div>
-		<span class="scroll-hint-text">Scroll</span>
-	</a>
-
 	<footer class="hero-footer">
-		<span class="credits">CREDITS LYNN'S PHOTO</span>
 		<div class="footer-center">
 			<p class="made">Made with ❤️ by Hack Club!</p>
 			<p><a href="https://github.com/hackclub" target="_blank" rel="noopener">All code is open sourced here!</a></p>
@@ -87,28 +81,18 @@
 	</footer>
 </div>
 
-<section class="steps" class:stepsVisible>
-	<div class="steps-inner">
-		<div class="step" style="--i: 0">
-			<div class="step-icon">⚡</div>
-			<h3 class="step-title">Ship</h3>
-			<p class="step-desc">Build projects and log your hours on hackatime.</p>
+<section class="feature" class:featureVisible>
+	<div class="feature-inner">
+		<div class="feature-media">
+			<img src="/basement.png" alt="Hack Club HQ Basement" class="feature-img" />
+			<span class="credits">CREDITS LYNN'S PHOTO</span>
 		</div>
-
-		<div class="step-arrow" style="--i: 1">→</div>
-
-		<div class="step" style="--i: 2">
-			<div class="step-icon">🎬</div>
-			<h3 class="step-title">Stream</h3>
-			<p class="step-desc">Every hour you ship adds time to the live stream of HQ basement.</p>
-		</div>
-
-		<div class="step-arrow" style="--i: 3">→</div>
-
-		<div class="step" style="--i: 4">
-			<div class="step-icon">🛒</div>
-			<h3 class="step-title">Spend</h3>
-			<p class="step-desc">Use your bits in the shop buy items, bid in live auctions.</p>
+		<div class="feature-content">
+			<p class="feature-eyebrow">Live 24/7</p>
+			<h2 class="feature-heading">
+				Stream in<br />HQ Basement
+			</h2>
+			<p class="feature-desc">Every hour you ship adds time to the live stream. Watch the chaos unfold in real time at Hack Club HQ.</p>
 		</div>
 	</div>
 </section>
@@ -166,24 +150,6 @@
 		flex-direction: column;
 	}
 
-	.bg {
-		position: absolute;
-		inset: 0;
-		background: url('https://cdn.hackclub.com/019cef53-06a8-7027-bbfe-a13878ec397a/shipathon__1_.png')
-			center / cover no-repeat;
-		z-index: 0;
-	}
-
-	.vignette {
-		position: absolute;
-		inset: 0;
-		background:
-			linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, transparent 15%),
-			linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, transparent 25%),
-			radial-gradient(ellipse at center, transparent 40%, rgba(0, 0, 0, 0.5) 100%);
-		z-index: 1;
-	}
-
 	main {
 		flex: 1;
 		display: flex;
@@ -230,6 +196,39 @@
 		font-style: italic;
 	}
 
+	.hero-eyebrow {
+		font-size: 0.8rem;
+		font-weight: 700;
+		letter-spacing: 0.2em;
+		text-transform: uppercase;
+		color: #ec3750;
+		opacity: 0;
+		transform: translateY(20px);
+		transition: opacity 0.8s ease, transform 0.8s ease;
+	}
+
+	.hero-desc {
+		font-size: clamp(0.95rem, 2vw, 1.15rem);
+		color: rgba(255, 255, 255, 0.5);
+		line-height: 1.7;
+		margin-top: 1.25rem;
+		max-width: 540px;
+		opacity: 0;
+		transform: translateY(20px);
+		transition: opacity 0.8s ease 0.3s, transform 0.8s ease 0.3s;
+	}
+
+	.hero-desc a {
+		color: #ec3750;
+		text-decoration: underline;
+	}
+
+	main.visible .hero-eyebrow,
+	main.visible .hero-desc {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
 	.coming-soon {
 		font-family: 'Phantom Sans', system-ui, sans-serif;
 		font-size: clamp(1.6rem, 4vw, 2.8rem);
@@ -245,7 +244,7 @@
 			0 2px 8px rgba(0, 0, 0, 0.7);
 		opacity: 0;
 		transform: translateY(20px);
-		transition: opacity 0.8s ease 0.4s, transform 0.8s ease 0.4s;
+		transition: opacity 0.8s ease 0.7s, transform 0.8s ease 0.7s;
 	}
 
 	main.visible .logo,
@@ -309,149 +308,82 @@
 		}
 	}
 
-	.scroll-hint {
-		position: absolute;
-		bottom: 5.5rem;
-		left: 50%;
-		z-index: 3;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 0.6rem;
-		text-decoration: none;
-		opacity: 0;
-		transform: translateX(-50%) translateY(10px);
-		transition: opacity 0.8s ease 1s, transform 0.8s ease 1s;
-	}
-
-	main.visible ~ .scroll-hint {
-		opacity: 1;
-		transform: translateX(-50%) translateY(0);
-	}
-
-	.scroll-mouse {
-		width: 26px;
-		height: 42px;
-		border: 2px solid rgba(255, 255, 255, 0.3);
-		border-radius: 14px;
-		display: flex;
-		justify-content: center;
-		padding-top: 8px;
-		transition: border-color 0.2s ease;
-	}
-
-	.scroll-hint:hover .scroll-mouse {
-		border-color: rgba(255, 255, 255, 0.6);
-	}
-
-	.scroll-wheel {
-		width: 3px;
-		height: 8px;
-		background: #ec3750;
-		border-radius: 3px;
-		animation: scroll-down 2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
-	}
-
-	@keyframes scroll-down {
-		0% {
-			opacity: 1;
-			transform: translateY(0);
-		}
-		40% {
-			opacity: 1;
-		}
-		100% {
-			opacity: 0;
-			transform: translateY(14px);
-		}
-	}
-
-	.scroll-hint-text {
-		font-family: 'Phantom Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-		font-size: 11px;
-		font-weight: 600;
-		letter-spacing: 0.15em;
-		text-transform: uppercase;
-		color: rgba(255, 255, 255, 0.3);
-		transition: color 0.2s ease;
-	}
-
-	.scroll-hint:hover .scroll-hint-text {
-		color: rgba(255, 255, 255, 0.6);
-	}
-
-	/* Steps */
-	.steps {
+	/* Feature */
+	.feature {
 		background: #000;
-		padding: 5rem 2rem;
-		border-top: 1px solid rgba(255, 255, 255, 0.06);
+		padding: 6rem 2rem;
 	}
 
-	.steps-inner {
-		max-width: 860px;
+	.feature-inner {
+		max-width: 960px;
 		margin: 0 auto;
-		display: flex;
-		align-items: flex-start;
-		justify-content: center;
-		gap: 2rem;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 4rem;
+		align-items: center;
 	}
 
-	.step {
-		flex: 1;
-		text-align: center;
+	.feature-media {
 		opacity: 0;
-		transform: translateY(20px);
-		transition: opacity 0.5s ease calc(var(--i) * 0.1s),
-			transform 0.5s ease calc(var(--i) * 0.1s);
+		transform: translateX(-24px);
+		transition: opacity 0.6s ease, transform 0.6s ease;
 	}
 
-	.stepsVisible .step {
+	.featureVisible .feature-media {
 		opacity: 1;
 		transform: none;
 	}
 
-	.step-icon {
-		font-size: 2.2rem;
+	.feature-img {
+		width: 100%;
+		border-radius: 12px;
+		display: block;
+	}
+
+	.feature-content {
+		opacity: 0;
+		transform: translateX(24px);
+		transition: opacity 0.6s ease 0.15s, transform 0.6s ease 0.15s;
+	}
+
+	.featureVisible .feature-content {
+		opacity: 1;
+		transform: none;
+	}
+
+	.feature-eyebrow {
+		font-size: 0.8rem;
+		font-weight: 700;
+		letter-spacing: 0.15em;
+		text-transform: uppercase;
+		color: #ec3750;
 		margin-bottom: 1rem;
 	}
 
-	.step-title {
-		font-size: 1.25rem;
-		font-weight: 700;
-		margin: 0 0 0.5rem;
+	.feature-heading {
+		font-size: clamp(2.4rem, 5vw, 3.6rem);
+		font-weight: 900;
+		line-height: 1.05;
+		letter-spacing: -0.02em;
+		margin: 0 0 1.25rem;
 		color: #fff;
 	}
 
-	.step-desc {
-		font-size: 0.9rem;
+	.feature-desc {
+		font-size: 1rem;
 		color: rgba(255, 255, 255, 0.4);
-		line-height: 1.5;
+		line-height: 1.65;
 		margin: 0;
 	}
 
-	.step-arrow {
-		font-size: 1.4rem;
-		color: rgba(255, 255, 255, 0.15);
-		padding-top: 1.8rem;
-		flex-shrink: 0;
-		opacity: 0;
-		transition: opacity 0.4s ease calc(var(--i) * 0.1s);
-	}
-
-	.stepsVisible .step-arrow {
-		opacity: 1;
-	}
-
-	@media (max-width: 600px) {
-		.steps-inner {
-			flex-direction: column;
-			align-items: center;
-			gap: 2.5rem;
+	@media (max-width: 700px) {
+		.feature-inner {
+			grid-template-columns: 1fr;
+			gap: 2rem;
 		}
 
-		.step-arrow {
-			padding-top: 0;
-			transform: rotate(90deg);
+		.feature-heading {
+			font-size: 2.2rem;
 		}
 	}
 
