@@ -3,7 +3,7 @@
 	<div class="tk-wrap">
 		<span class="tk-track">
 			{#each [0, 1] as _}
-				&nbsp;&nbsp;<span class="tk-hi">SHIPGOALS</span><span class="tk-sep">·</span>EVENTS<span class="tk-sep">·</span>AUCTIONS<span class="tk-sep">·</span><span class="tk-hi">AND SO MUCH MORE TO COME</span><span class="tk-sep">·</span>SHIPGOALS<span class="tk-sep">·</span>EVENTS<span class="tk-sep">·</span>AUCTIONS<span class="tk-sep">·</span><span class="tk-hi">AND SO MUCH MORE TO COME</span><span class="tk-sep">·</span>&nbsp;&nbsp;
+				&nbsp;&nbsp;<span class="tk-hi">SHIPGOALS</span><span class="tk-sep">·</span>EVENTS<span class="tk-sep">·</span>AUCTIONS<span class="tk-sep">·</span><span class="tk-hi">AND SO MUCH MORE TO COME</span><span class="tk-sep">·</span>SHIP TO KEEP IT ALIVE<span class="tk-sep">·</span><span class="tk-hi">EARN TOKENS</span><span class="tk-sep">·</span>LIVE ON HACKCLUB.TV<span class="tk-sep">·</span><span class="tk-hi">SHIPGOALS</span><span class="tk-sep">·</span>EVENTS<span class="tk-sep">·</span>AUCTIONS<span class="tk-sep">·</span><span class="tk-hi">AND SO MUCH MORE TO COME</span><span class="tk-sep">·</span>SHIP TO KEEP IT ALIVE<span class="tk-sep">·</span><span class="tk-hi">EARN TOKENS</span><span class="tk-sep">·</span>LIVE ON HACKCLUB.TV<span class="tk-sep">·</span>&nbsp;&nbsp;
 			{/each}
 		</span>
 	</div>
@@ -90,7 +90,7 @@
 
 	.tk-track {
 		display: inline-block;
-		animation: scroll 20s linear infinite;
+		animation: scroll 10s linear infinite;
 		font-family: 'Phantom Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 		font-size: 11px;
 		font-weight: 700;

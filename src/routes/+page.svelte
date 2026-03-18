@@ -64,7 +64,12 @@
 		<h1 class="logo">shipathon</h1>
 		<p class="tagline">You ship. <span class="alive">We stream.</span></p>
 		<p class="hero-desc">You heard of a subathon, well this is Hack Club's spin on it.<br />Ship hours, earn tokens, and keep a 24/7 live stream of HQ basement <span class="alive">alive</span> on <a href="https://hackclub.tv" target="_blank" rel="noopener noreferrer">hackclub.tv</a></p>
+		<a href="https://forms.fillout.com/t/fXkrkbBBShus" target="_blank" rel="noopener noreferrer" class="rsvp-btn">RSVP</a>
+		<a href="#faq" class="scroll-arrow" aria-label="Scroll to FAQ">
+			<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+		</a>
 	</main>
+	<span class="photo-credit">photo credit — lynn</span>
 	<footer class="hero-footer">
 		<div class="footer-center">
 			<p class="made">Made with ❤️ by Hack Club!</p>
@@ -128,7 +133,7 @@
 		display: flex;
 		flex-direction: column;
 		background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.75)),
-			url('/basement.png');
+			url('/basement.webp');
 		background-size: cover;
 		background-position: center;
 		background-repeat: no-repeat;
@@ -157,9 +162,6 @@
 			0 2px 10px rgba(0, 0, 0, 0.7);
 		line-height: 0.9;
 		letter-spacing: -0.02em;
-		opacity: 0;
-		transform: translateY(20px);
-		transition: opacity 0.8s ease, transform 0.8s ease;
 	}
 
 	.tagline {
@@ -169,9 +171,6 @@
 		color: rgba(255, 255, 255, 0.9);
 		margin-top: 1rem;
 		text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9);
-		opacity: 0;
-		transform: translateY(20px);
-		transition: opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s;
 	}
 
 	.alive,
@@ -186,9 +185,6 @@
 		letter-spacing: 0.2em;
 		text-transform: uppercase;
 		color: #ec3750;
-		opacity: 0;
-		transform: translateY(20px);
-		transition: opacity 0.8s ease, transform 0.8s ease;
 	}
 
 	.hero-desc {
@@ -197,9 +193,6 @@
 		line-height: 1.7;
 		margin-top: 1.25rem;
 		max-width: 540px;
-		opacity: 0;
-		transform: translateY(20px);
-		transition: opacity 0.8s ease 0.3s, transform 0.8s ease 0.3s;
 	}
 
 	.hero-desc a {
@@ -207,16 +200,61 @@
 		text-decoration: underline;
 	}
 
-	main.visible .hero-eyebrow,
-	main.visible .hero-desc {
-		opacity: 1;
-		transform: translateY(0);
+	.rsvp-btn {
+		display: inline-block;
+		margin-top: 1.75rem;
+		padding: 0.85rem 2.5rem;
+		background: #ec3750;
+		color: #fff;
+		font-family: 'Phantom Sans', system-ui, sans-serif;
+		font-size: 1.1rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		text-decoration: none;
+		border-radius: 8px;
+		box-shadow: 0 0 20px rgba(236, 55, 80, 0.4), 0 4px 12px rgba(0, 0, 0, 0.3);
+		transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
 	}
 
-	main.visible .logo,
-	main.visible .tagline {
-		opacity: 1;
+	.rsvp-btn:hover {
+		background: #d42f45;
+		transform: translateY(-3px);
+		box-shadow: 0 0 30px rgba(236, 55, 80, 0.6), 0 6px 20px rgba(0, 0, 0, 0.4);
+	}
+
+	.rsvp-btn:active {
 		transform: translateY(0);
+		box-shadow: 0 0 15px rgba(236, 55, 80, 0.3), 0 2px 8px rgba(0, 0, 0, 0.3);
+	}
+
+	.scroll-arrow {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		margin-top: 2rem;
+		color: rgba(255, 255, 255, 0.4);
+		animation: bounce 2s ease-in-out infinite;
+		text-decoration: none;
+	}
+
+	.scroll-arrow:hover {
+		color: #ec3750;
+	}
+
+	@keyframes bounce {
+		0%, 100% { transform: translateY(0); }
+		50% { transform: translateY(8px); }
+	}
+
+	.photo-credit {
+		position: absolute;
+		left: 1rem;
+		bottom: 4.5rem;
+		font-size: 11px;
+		color: rgba(255, 255, 255, 0.25);
+		z-index: 2;
+		letter-spacing: 0.05em;
 	}
 
 	.hero-footer {
