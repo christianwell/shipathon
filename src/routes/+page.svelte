@@ -4,7 +4,6 @@
 
 	let visible = $state(false);
 
-	let featureVisible = $state(false);
 	let faqVisible = $state(false);
 	let openIndex = $state(-1);
 
@@ -18,11 +17,12 @@
 			a: "You heard of a subathon, and a shipathon is hack club's spin on that! ship hours keep the stream <span class=\"alive\">alive</span>"
 		},
 		{
-			q: "So how does it work?",
-		},
-		{
 			q: "But what do I get?",
 			a: "We will have a shop where users can buy items with the hours they ship, and were gonna run events like live auctions."
+		},
+		{
+			q: "What's gonna happen on the stream?",
+			a: "EVENTS, AUCTIONS AND SO MUCH MORE TO COME"
 		},
 		{
 			q: "When does this end?",
@@ -41,15 +41,11 @@
 			(entries) => {
 				entries.forEach((entry) => {
 					if (!entry.isIntersecting) return;
-						if (entry.target.classList.contains('feature')) featureVisible = true;
 						if (entry.target.classList.contains('faq')) faqVisible = true;
 				});
 			},
 			{ threshold: 0.15 }
 		);
-
-		const featureEl = document.querySelector('.feature');
-		if (featureEl) observer.observe(featureEl);
 
 		const el = document.querySelector('.faq');
 		if (el) observer.observe(el);
@@ -67,34 +63,18 @@
 		<p class="hero-eyebrow">Hack Club presents</p>
 		<h1 class="logo">shipathon</h1>
 		<p class="tagline">You ship. <span class="alive">We stream.</span></p>
-		<p class="hero-desc">You heard of a subathon,well this is Hack Club's spin on it.<br />Ship code, earn hours, and keep a 24/7 live stream of HQ basement alive on <a href="https://hackclub.tv" target="_blank" rel="noopener noreferrer">hackclub.tv</a></p>
-
-		<a href="https://forms.fillout.com/t/fXkrkbBBShus" target="_blank" rel="noopener noreferrer" class="coming-soon">COMING SOON</a>
+		<p class="hero-desc">You heard of a subathon, well this is Hack Club's spin on it.<br />Ship hours, earn tokens, and keep a 24/7 live stream of HQ basement <span class="alive">alive</span> on <a href="https://hackclub.tv" target="_blank" rel="noopener noreferrer">hackclub.tv</a></p>
 	</main>
 	<footer class="hero-footer">
 		<div class="footer-center">
 			<p class="made">Made with ❤️ by Hack Club!</p>
-			<p><a href="https://github.com/hackclub" target="_blank" rel="noopener">All code is open sourced here!</a></p>
+			<p><a href="https://github.com/christianwell/shipathon" target="_blank" rel="noopener">All code is open sourced here!</a></p>
 			<p class="legal">Hack Club. 501(c)(3) nonprofit (EIN: 81-2908499)</p>
 		</div>
 	</footer>
 </div>
 
-<section class="feature" class:featureVisible>
-	<div class="feature-inner">
-		<div class="feature-media">
-			<img src="/basement.png" alt="Hack Club HQ Basement" class="feature-img" />
-			<span class="credits">CREDITS LYNN'S PHOTO</span>
-		</div>
-		<div class="feature-content">
-			<p class="feature-eyebrow">Live 24/7</p>
-			<h2 class="feature-heading">
-				Stream in<br />HQ Basement
-			</h2>
-			<p class="feature-desc">Every hour you ship adds time to the live stream. Watch the chaos unfold in real time at Hack Club HQ.</p>
-		</div>
-	</div>
-</section>
+
 
 <section id="faq" class="faq" class:faqVisible>
 	<div class="faq-inner">
@@ -147,6 +127,11 @@
 		min-height: 100vh;
 		display: flex;
 		flex-direction: column;
+		background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.75)),
+			url('/basement.png');
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
 	}
 
 	main {
@@ -228,27 +213,8 @@
 		transform: translateY(0);
 	}
 
-	.coming-soon {
-		font-family: 'Phantom Sans', system-ui, sans-serif;
-		font-size: clamp(1.6rem, 4vw, 2.8rem);
-		font-weight: bold;
-		font-style: italic;
-		text-transform: uppercase;
-		margin-top: 1.5rem;
-		letter-spacing: 0.05em;
-		color: inherit;
-		text-decoration: underline;
-		text-shadow:
-			0 4px 20px rgba(0, 0, 0, 0.9),
-			0 2px 8px rgba(0, 0, 0, 0.7);
-		opacity: 0;
-		transform: translateY(20px);
-		transition: opacity 0.8s ease 0.7s, transform 0.8s ease 0.7s;
-	}
-
 	main.visible .logo,
-	main.visible .tagline,
-	main.visible .coming-soon {
+	main.visible .tagline {
 		opacity: 1;
 		transform: translateY(0);
 	}
@@ -304,85 +270,6 @@
 	@media (max-width: 600px) {
 		.credits {
 			display: none;
-		}
-	}
-
-	/* Feature */
-	.feature {
-		background: #000;
-		padding: 6rem 2rem;
-	}
-
-	.feature-inner {
-		max-width: 960px;
-		margin: 0 auto;
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		gap: 4rem;
-		align-items: center;
-	}
-
-	.feature-media {
-		opacity: 0;
-		transform: translateX(-24px);
-		transition: opacity 0.6s ease, transform 0.6s ease;
-	}
-
-	.featureVisible .feature-media {
-		opacity: 1;
-		transform: none;
-	}
-
-	.feature-img {
-		width: 100%;
-		border-radius: 12px;
-		display: block;
-	}
-
-	.feature-content {
-		opacity: 0;
-		transform: translateX(24px);
-		transition: opacity 0.6s ease 0.15s, transform 0.6s ease 0.15s;
-	}
-
-	.featureVisible .feature-content {
-		opacity: 1;
-		transform: none;
-	}
-
-	.feature-eyebrow {
-		font-size: 0.8rem;
-		font-weight: 700;
-		letter-spacing: 0.15em;
-		text-transform: uppercase;
-		color: #ec3750;
-		margin-bottom: 1rem;
-	}
-
-	.feature-heading {
-		font-size: clamp(2.4rem, 5vw, 3.6rem);
-		font-weight: 900;
-		line-height: 1.05;
-		letter-spacing: -0.02em;
-		margin: 0 0 1.25rem;
-		color: #fff;
-	}
-
-	.feature-desc {
-		font-size: 1rem;
-		color: rgba(255, 255, 255, 0.4);
-		line-height: 1.65;
-		margin: 0;
-	}
-
-	@media (max-width: 700px) {
-		.feature-inner {
-			grid-template-columns: 1fr;
-			gap: 2rem;
-		}
-
-		.feature-heading {
-			font-size: 2.2rem;
 		}
 	}
 
