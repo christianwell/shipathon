@@ -22,7 +22,6 @@
 		},
 		{
 			q: "But what do I get?",
-			a: "You ship hours to keep up a live stream of HQ basement "
 			a: "We will have a shop where users can buy items with the hours they ship, and were gonna run events like live auctions."
 		},
 		{
