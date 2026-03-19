@@ -7,6 +7,7 @@
 
 	let faqVisible = $state(false);
 	let openIndex = $state(-1);
+	let showSubathon = $state(false);
 
 	const faqs = [
 		{
@@ -15,7 +16,7 @@
 		},
 		{
 			q: "What even is a shipathon?",
-			a: "You heard of a subathon, and a shipathon is hack club's spin on that! ship hours keep the stream <span class=\"alive\">alive</span>"
+			a: "You heard of a <button class=\"subathon-link\" onclick=\"window.__showSubathon()\">subathon</button>, and a shipathon is hack club's spin on that! ship hours keep the stream <span class=\"alive\">alive</span>"
 		},
 		{
 			q: "But what do I get?",
@@ -37,6 +38,7 @@
 
 	onMount(() => {
 		visible = true;
+		(window as any).__showSubathon = () => { showSubathon = true; };
 
 		const observer = new IntersectionObserver(
 			(entries) => {
@@ -64,7 +66,18 @@
 		<p class="hero-eyebrow">Hack Club presents</p>
 		<h1 class="logo">shipathon</h1>
 		<p class="tagline">You ship. <span class="alive">We stream.</span></p>
-		<p class="hero-desc">You heard of a subathon, well this is Hack Club's spin on it.<br />Ship hours, earn tokens, and keep a 24/7 live stream of HQ basement <span class="alive">alive</span> on <a href="https://hackclub.tv" target="_blank" rel="noopener noreferrer">hackclub.tv</a></p>
+		<p class="hero-desc">You heard of a <button class="subathon-link" onclick={() => showSubathon = !showSubathon}>subathon</button>, well this is Hack Club's spin on it.<br />Ship hours, earn tokens, and keep a 24/7 live stream of HQ basement <span class="alive">alive</span> on <a href="https://hackclub.tv" target="_blank" rel="noopener noreferrer">hackclub.tv</a></p>
+		{#if showSubathon}
+			<!-- svelte-ignore a11y_no_static_element_interactions -->
+			<div class="subathon-overlay" onclick={() => showSubathon = false} onkeydown={(e) => e.key === 'Escape' && (showSubathon = false)}>
+				<div class="subathon-popup" onclick={(e) => e.stopPropagation()}>
+					<button class="subathon-close" onclick={() => showSubathon = false}>✕</button>
+					<h3>What's a subathon?</h3>
+					<p>A <strong>subathon</strong> (subscription marathon) is a livestream where the timer keeps going as long as viewers keep subscribing or donating. Every sub or donation adds more time to the clock! when the timer hits zero, the stream ends.</p>
+					<p>A <strong>shipathon</strong> is Hack Club's twist: instead of subscribing, you <em>ship projects</em>. Every hour you ship adds time to the stream. Keep shipping to keep it <span class="alive">alive</span>!</p>
+				</div>
+			</div>
+		{/if}
 		<a href="https://forms.fillout.com/t/fXkrkbBBShus" target="_blank" rel="noopener noreferrer" class="rsvp-btn" onclick={() => track('rsvp_click')}>RSVP</a>
 		<a href="#faq" class="scroll-arrow" aria-label="Scroll to FAQ">
 			<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
@@ -444,6 +457,84 @@
 	.faq-a :global(a) {
 		color: #ec3750;
 		text-decoration: underline;
+	}
+
+	.subathon-link,
+	:global(.subathon-link) {
+		all: unset;
+		cursor: pointer;
+		font: inherit;
+		color: inherit;
+		text-decoration: underline;
+		text-decoration-style: dotted;
+		text-underline-offset: 3px;
+		transition: color 0.2s ease;
+	}
+
+	.subathon-link:hover,
+	:global(.subathon-link:hover) {
+		color: #ec3750;
+	}
+
+	.subathon-overlay {
+		position: fixed;
+		inset: 0;
+		background: rgba(0, 0, 0, 0.7);
+		backdrop-filter: blur(4px);
+		z-index: 100;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 1rem;
+	}
+
+	.subathon-popup {
+		position: relative;
+		background: #1a1a1a;
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		border-radius: 12px;
+		padding: 2rem;
+		max-width: 460px;
+		width: 100%;
+		animation: popIn 0.2s ease;
+	}
+
+	@keyframes popIn {
+		from { opacity: 0; transform: scale(0.95); }
+		to { opacity: 1; transform: scale(1); }
+	}
+
+	.subathon-popup h3 {
+		font-size: 1.3rem;
+		font-weight: 700;
+		margin-bottom: 1rem;
+		color: #fff;
+	}
+
+	.subathon-popup p {
+		font-size: 0.95rem;
+		color: rgba(255, 255, 255, 0.6);
+		line-height: 1.7;
+		margin-bottom: 0.75rem;
+	}
+
+	.subathon-popup p:last-child {
+		margin-bottom: 0;
+	}
+
+	.subathon-close {
+		all: unset;
+		cursor: pointer;
+		position: absolute;
+		top: 1rem;
+		right: 1rem;
+		color: rgba(255, 255, 255, 0.3);
+		font-size: 1.1rem;
+		transition: color 0.2s ease;
+	}
+
+	.subathon-close:hover {
+		color: #fff;
 	}
 
 	@media (max-width: 700px) {
