@@ -15,6 +15,10 @@
 			a: "Yeah you heard that right YOU ship and WE STREAM ON <a href=\"https://hackclub.tv\" target=\"_blank\" rel=\"noopener noreferrer\">HACKCLUB.TV</a> "
 		},
 		{
+			q: "What's a subathon?",
+			a: "A <strong>subathon</strong> (subscription marathon) is a livestream where the timer keeps going as long as viewers keep subscribing or donating. Every sub or donation adds more time to the clock! when the timer hits zero, the stream ends."
+		},
+		{
 			q: "What even is a shipathon?",
 			a: "You heard of a <button class=\"subathon-link\" onclick=\"window.__showSubathon()\">subathon</button>, and a shipathon is hack club's spin on that! ship hours keep the stream <span class=\"alive\">alive</span>"
 		},
