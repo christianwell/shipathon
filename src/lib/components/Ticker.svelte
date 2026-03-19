@@ -90,7 +90,7 @@
 
 	.tk-track {
 		display: inline-block;
-		animation: scroll 10s linear infinite;
+		animation: scroll 25s linear infinite;
 		font-family: 'Phantom Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 		font-size: 11px;
 		font-weight: 700;
