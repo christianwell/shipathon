@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Ticker from '$lib/components/Ticker.svelte';
+	import { track } from '@vercel/analytics';
 	import { onMount } from 'svelte';
 
 	let visible = $state(false);
@@ -64,7 +65,7 @@
 		<h1 class="logo">shipathon</h1>
 		<p class="tagline">You ship. <span class="alive">We stream.</span></p>
 		<p class="hero-desc">You heard of a subathon, well this is Hack Club's spin on it.<br />Ship hours, earn tokens, and keep a 24/7 live stream of HQ basement <span class="alive">alive</span> on <a href="https://hackclub.tv" target="_blank" rel="noopener noreferrer">hackclub.tv</a></p>
-		<a href="https://forms.fillout.com/t/fXkrkbBBShus" target="_blank" rel="noopener noreferrer" class="rsvp-btn">RSVP</a>
+		<a href="https://forms.fillout.com/t/fXkrkbBBShus" target="_blank" rel="noopener noreferrer" class="rsvp-btn" onclick={() => track('rsvp_click')}>RSVP</a>
 		<a href="#faq" class="scroll-arrow" aria-label="Scroll to FAQ">
 			<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
 		</a>
