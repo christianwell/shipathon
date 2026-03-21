@@ -142,6 +142,11 @@
 		background: #000;
 		color: #fff;
 		font-family: 'Phantom Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+		-webkit-tap-highlight-color: transparent;
+	}
+
+	:global(html) {
+		scroll-behavior: smooth;
 	}
 
 	.page {
@@ -150,6 +155,7 @@
 		min-height: 100vh;
 		display: flex;
 		flex-direction: column;
+		overflow-x: hidden;
 		background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.75)),
 			url('/basement.webp');
 		background-size: cover;
@@ -242,7 +248,7 @@
 	}
 
 	.rsvp-btn:active {
-		transform: translateY(0);
+		transform: translateY(1px) scale(0.97);
 		box-shadow: 0 0 15px rgba(236, 55, 80, 0.3), 0 2px 8px rgba(0, 0, 0, 0.3);
 	}
 
@@ -326,6 +332,99 @@
 	@media (max-width: 600px) {
 		.credits {
 			display: none;
+		}
+
+		.page {
+			background-position: center top;
+		}
+
+		main {
+			padding-top: 56px;
+			padding-left: 1.75rem;
+			padding-right: 1.75rem;
+			justify-content: center;
+			min-height: calc(100vh - 38px);
+		}
+
+		.logo {
+			font-size: clamp(2.8rem, 12vw, 4.5rem);
+			word-break: break-word;
+		}
+
+		.hero-eyebrow {
+			font-size: 0.7rem;
+			letter-spacing: 0.25em;
+		}
+
+		.tagline {
+			font-size: 1.05rem;
+			margin-top: 0.75rem;
+		}
+
+		.hero-desc {
+			font-size: 0.82rem;
+			line-height: 1.7;
+			margin-top: 1rem;
+		}
+
+		.hero-desc br {
+			display: none;
+		}
+
+		.rsvp-btn {
+			margin-top: 1.5rem;
+			padding: 0.85rem 2.5rem;
+			font-size: 1rem;
+		}
+
+		.scroll-arrow {
+			margin-top: 1.25rem;
+		}
+
+		.photo-credit {
+			bottom: 3.5rem;
+			font-size: 10px;
+		}
+
+		.hero-footer {
+			padding: 1rem 1.25rem 1.25rem;
+		}
+
+		.footer-center {
+			font-size: 12px;
+		}
+
+		.subathon-popup {
+			padding: 1.5rem;
+			border-radius: 14px;
+			margin: 0.75rem;
+		}
+
+		.subathon-popup h3 {
+			font-size: 1.15rem;
+		}
+
+		.subathon-popup p {
+			font-size: 0.875rem;
+		}
+	}
+
+	@media (max-width: 380px) {
+		.logo {
+			font-size: 2.5rem;
+		}
+
+		.tagline {
+			font-size: 0.95rem;
+		}
+
+		.hero-desc {
+			font-size: 0.8rem;
+		}
+
+		.rsvp-btn {
+			padding: 0.8rem 1.75rem;
+			font-size: 0.95rem;
 		}
 	}
 
@@ -544,7 +643,7 @@
 	@media (max-width: 700px) {
 		.faq-inner {
 			grid-template-columns: 1fr;
-			gap: 2.5rem;
+			gap: 2rem;
 		}
 
 		.faq-left {
@@ -554,6 +653,27 @@
 
 		.faq-heading {
 			font-size: 2.2rem;
+		}
+
+		.faq {
+			padding: 3.5rem 1.25rem;
+		}
+
+		.faq-q {
+			padding: 1rem 0;
+		}
+
+		.faq-q-text {
+			font-size: 0.9rem;
+		}
+
+		.faq-a p {
+			font-size: 0.85rem;
+			line-height: 1.6;
+		}
+
+		.faq-item.open .faq-a p {
+			padding-bottom: 1rem;
 		}
 	}
 </style>

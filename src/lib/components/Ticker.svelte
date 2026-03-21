@@ -116,4 +116,41 @@
 			transform: translateX(-50%);
 		}
 	}
+
+	@media (max-width: 600px) {
+		.ticker {
+			height: 38px;
+		}
+
+		.tk-pill {
+			left: 10px;
+			padding: 2px 8px 2px 6px;
+			font-size: 9px;
+			gap: 4px;
+		}
+
+		.tk-dot {
+			width: 5px;
+			height: 5px;
+		}
+
+		.tk-wrap {
+			padding-left: 75px;
+		}
+
+		.tk-track {
+			font-size: 9.5px;
+			letter-spacing: 0.14em;
+			animation-duration: 18s;
+		}
+
+		.tk-sep {
+			margin: 0 4px;
+		}
+
+		.ticker::before,
+		.ticker::after {
+			width: 40px;
+		}
+	}
 </style>
