@@ -340,8 +340,8 @@
 
 		main {
 			padding-top: 56px;
-			padding-left: 1.75rem;
-			padding-right: 1.75rem;
+			padding-left: 1.25rem;
+			padding-right: 1.25rem;
 			justify-content: center;
 			min-height: calc(100vh - 38px);
 		}
@@ -362,9 +362,10 @@
 		}
 
 		.hero-desc {
-			font-size: 0.82rem;
+			font-size: 0.85rem;
 			line-height: 1.7;
 			margin-top: 1rem;
+			width: 100%;
 		}
 
 		.hero-desc br {
