@@ -2,6 +2,7 @@
 	import Ticker from '$lib/components/Ticker.svelte';
 	import { track } from '@vercel/analytics';
 	import { onMount } from 'svelte';
+	import posthog from 'posthog-js';
 
 	let visible = $state(false);
 
@@ -37,7 +38,11 @@
 	];
 
 	function toggle(i: number) {
+		const isOpening = openIndex !== i;
 		openIndex = openIndex === i ? -1 : i;
+		if (isOpening) {
+			posthog.capture('faq_item_opened', { question: faqs[i].q, index: i });
+		}
 	}
 
 	onMount(() => {
@@ -48,7 +53,10 @@
 			(entries) => {
 				entries.forEach((entry) => {
 					if (!entry.isIntersecting) return;
-						if (entry.target.classList.contains('faq')) faqVisible = true;
+						if (entry.target.classList.contains('faq')) {
+					faqVisible = true;
+					posthog.capture('faq_section_viewed');
+				}
 				});
 			},
 			{ threshold: 0.15 }
@@ -70,7 +78,7 @@
 		<p class="hero-eyebrow">Hack Club presents</p>
 		<h1 class="logo">shipathon</h1>
 		<p class="tagline">You ship. <span class="alive">We stream.</span></p>
-		<p class="hero-desc">You heard of a <button class="subathon-link" onclick={() => showSubathon = !showSubathon}>subathon</button>, well this is Hack Club's spin on it.<br />Ship hours, earn tokens, and keep a 24/7 live stream of HQ basement <span class="alive">alive</span> on <a href="https://hackclub.tv" target="_blank" rel="noopener noreferrer">hackclub.tv</a></p>
+		<p class="hero-desc">You heard of a <button class="subathon-link" onclick={() => { const opening = !showSubathon; showSubathon = opening; if (opening) posthog.capture('subathon_popup_opened', { source: 'hero' }); }}>subathon</button>, well this is Hack Club's spin on it.<br />Ship hours, earn tokens, and keep a 24/7 live stream of HQ basement <span class="alive">alive</span> on <a href="https://hackclub.tv" target="_blank" rel="noopener noreferrer" onclick={() => posthog.capture('hackclub_tv_link_clicked', { source: 'hero' })}>hackclub.tv</a></p>
 		{#if showSubathon}
 			<!-- svelte-ignore a11y_no_static_element_interactions -->
 			<div class="subathon-overlay" onclick={() => showSubathon = false} onkeydown={(e) => e.key === 'Escape' && (showSubathon = false)}>
@@ -82,7 +90,7 @@
 				</div>
 			</div>
 		{/if}
-		<a href="https://forms.fillout.com/t/fXkrkbBBShus" target="_blank" rel="noopener noreferrer" class="rsvp-btn" onclick={() => track('rsvp_click')}>RSVP</a>
+		<a href="https://forms.fillout.com/t/fXkrkbBBShus" target="_blank" rel="noopener noreferrer" class="rsvp-btn" onclick={() => { track('rsvp_click'); posthog.capture('rsvp_clicked'); }}>RSVP</a>
 		<a href="#faq" class="scroll-arrow" aria-label="Scroll to FAQ">
 			<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
 		</a>
